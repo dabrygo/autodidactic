@@ -29,7 +29,25 @@ with open('us-states.csv') as f:
         states.append(line)
 
 
+n = 50
+correct = 0
 keys = states
-choice = random.choice(keys)
-fact = Fact(choice, 'state', 'capital')
-print(fact.question())
+for i in range(n):
+    choice = random.choice(keys)
+    fact = Fact(choice, 'state', 'capital')
+
+    print(f"Question {i}/{n}")
+    print("True or False.", fact.question())
+    answer = input(">>> ").strip()
+    while answer not in ['T', 'F']:
+        print(f"Invalid answer '{answer}'. Please type T or F.")
+        print("True or False:", fact.question())
+        answer = input(">>> ").strip()
+
+    if answer == 'T' and fact.is_true():
+        correct += 1
+    elif answer == 'F' and fact.is_false():
+        correct += 1
+    else:
+        print("Nope.")
+
